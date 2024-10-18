@@ -1,6 +1,6 @@
 import os from "os";
 
-export const os = async (input) => {
+export const systemOps = async (input) => {
   const secondArg = input.trim().split(" ")[1];
 
   switch (secondArg) {

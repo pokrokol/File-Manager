@@ -1,7 +1,7 @@
 import process from "process";
 import path from "path";
 
-export const moveUpDirectory = async () => {
+export const up = async () => {
   try {
     const rootDir = path.parse(process.cwd()).root;
     const currentDir = process.cwd();

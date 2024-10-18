@@ -1,5 +1,5 @@
 import fs from "fs/promises";
-import { resolveAbsolutePath } from "../helper/pathChecker";
+import { resolveAbsolutePath } from "../helper/pathChecker.js";
 
 export const remove = async (input) => {
   const fileName = input.trim().split(" ")[1];

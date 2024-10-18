@@ -1,6 +1,6 @@
 import fs from "fs";
 import zlib from "zlib";
-import { resolveAbsolutePath } from "../helper/pathChecker";
+import { resolveAbsolutePath } from "../helper/pathChecker.js";
 import path from "path";
 
 export const decompress = async (input) => {

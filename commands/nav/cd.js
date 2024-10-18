@@ -1,6 +1,5 @@
-import { resolveAbsolutePath } from "../helper/pathChecker";
-
-export const changeDirectory = async (command) => {
+import { resolveAbsolutePath } from "../helper/pathChecker.js";
+export const cd = async (command) => {
   const targetPath = command.trim().split(" ")[1];
   const absolutePath = resolveAbsolutePath(targetPath);
 

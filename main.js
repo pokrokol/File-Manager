@@ -1,4 +1,5 @@
 import readline from "readline";
+import path from "path";
 import { cat } from "./commands/fs/cat.js";
 import { add } from "./commands/fs/add.js";
 import { rename } from "./commands/fs/rename.js";
@@ -9,101 +10,95 @@ import { up } from "./commands/nav/up.js";
 import { cd } from "./commands/nav/cd.js";
 import { ls } from "./commands/nav/ls.js";
 import { compress } from "./commands/zlib/compress.js";
-import { decompress } from "./zip/decompress.js";
+import { decompress } from "./commands/zlib/decompress.js";
 import { hash } from "./commands/hash/hash.js";
-import {os} from "./commands/os.js"
+import { systemOps } from "./commands/os/os.js";
+
 const rl = readline.createInterface({
-  input: process.stdin,
+  inp: process.stdin,
   output: process.stdout,
 });
 
-const getCurrentPath = () => process.cwd();
-
 const fileManager = async () => {
-  const user = process.argv.find((arg) => arg.startsWith("--username="));
-
-  if (!user) {
-    console.error(
-      "Provide a username. Example: npm run start -- --username=John"
+  const main_path = () => process.cwd();
+  console.log(`You are currently in ${process.cwd()}`);
+  const user = process.argv[2].split("=")[1];
+  if (user === undefined) {
+    console.log(
+      "Provide a username. Example: npm run start -- --username=Mike"
     );
     process.exit();
   }
+  console.log(`Welcome to the File Manager, ${user}!\n`);
+  rl.on("line", async (inp) => {
+    let argument = inp.trim().split(" ")[0];
 
-  const username = user.split("=")[1];
-  console.log(`Welcome ${username}!\n`);
-  console.log(`You are currently in ${getCurrentPath()}`);
-
-  rl.on("line", async (input) => {
-    const [command, ...args] = input.trim().split(/\s+/);
-
-    try {
-      switch (command) {
-        case ".exit":
-          console.log(`Exit, Thanks for using ${username}!`);
-          process.exit();
-
-        case "add":
-          await add(args.join(" "));
-          break;
-
-        case "cat":
-          await cat(args.join(" "));
-          break;
-
-        case "rn":
-          await rename(args.join(" "));
-          break;
-
-        case "cp":
-          await copy(args.join(" "));
-          break;
-
-        case "mv":
-          await move(args.join(" "));
-          break;
-
-        case "rm":
-          await remove(args.join(" "));
-          break;
-
-        case "up":
-          await up();
-          break;
-
-        case "cd":
-          await cd(args.join(" "));
-          break;
-
-        case "ls":
-          await ls();
-          break;
-
-        case "hash":
-          await hash(args.join(" "));
-          break;
-
-        case "compress":
-          await compress(args.join(" "));
-          break;
-
-        case "decompress":
-          await decompress(args.join(" "));
-          break;
-        case "os":
-          await os(args.join(" "));
-          break;
-        default:
-          console.error("Invalid command");
+    switch (argument) {
+      case ".exit": {
+        console.log(`Thank you, Bye, ${user}!`);
+        process.exit();
       }
-    } catch (err) {
-      console.error(`Error executing command: ${err.message}`);
+      case "up": {
+        await up();
+        break;
+      }
+      case "cd": {
+        await cd(inp);
+        break;
+      }
+      case "ls": {
+        await ls();
+        break;
+      }
+      case "add": {
+        await add(inp);
+        break;
+      }
+      case "cat": {
+        await cat(inp);
+        break;
+      }
+      case "rn": {
+        await rename(inp);
+        break;
+      }
+      case "cp": {
+        await copy(inp);
+        break;
+      }
+      case "mv": {
+        await move(inp);
+        break;
+      }
+      case "rm": {
+        await remove(inp);
+        break;
+      }
+      case "hash": {
+        await hash(inp);
+        break;
+      }
+      case "compress": {
+        await compress(inp);
+        break;
+      }
+      case "decompress": {
+        await decompress(inp);
+        break;
+      }
+
+      case "os": {
+        await systemOps(inp);
+        break;
+      }
+      default: {
+        console.log("Invalid command");
+      }
     }
-
-    console.log(`You are currently in ${getCurrentPath()}`);
+    console.log(`You are currently in ${main_path()}`);
   });
-
   rl.on("SIGINT", () => {
-    console.log(`Thank you, Bye, ${username}!`);
+    console.log(`hi, ${user}!`);
     rl.close();
   });
 };

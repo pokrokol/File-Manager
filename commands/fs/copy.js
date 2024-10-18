@@ -1,5 +1,5 @@
 import fs from "fs";
-import { resolveAbsolutePath } from "../helper/pathChecker";
+import { resolveAbsolutePath } from "../helper/pathChecker.js";
 import path from "path";
 
 export const copy = async (input) => {

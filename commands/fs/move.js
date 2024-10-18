@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { resolveAbsolutePath } from "../helper/pathChecker";
+import { resolveAbsolutePath } from "../helper/pathChecker.js";
 
 export const move = (input) => {
   const sourceFileName = input.trim().split(" ")[1];

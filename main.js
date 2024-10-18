@@ -15,7 +15,7 @@ import { hash } from "./commands/hash/hash.js";
 import { systemOps } from "./commands/os/os.js";
 
 const rl = readline.createInterface({
-  inp: process.stdin,
+  input: process.stdin,
   output: process.stdout,
 });
 
@@ -30,8 +30,8 @@ const fileManager = async () => {
     process.exit();
   }
   console.log(`Welcome to the File Manager, ${user}!\n`);
-  rl.on("line", async (inp) => {
-    let argument = inp.trim().split(" ")[0];
+  rl.on("line", async (input) => {
+    let argument = input.trim().split(" ")[0];
 
     switch (argument) {
       case ".exit": {
@@ -43,7 +43,7 @@ const fileManager = async () => {
         break;
       }
       case "cd": {
-        await cd(inp);
+        await cd(input);
         break;
       }
       case "ls": {
@@ -51,44 +51,44 @@ const fileManager = async () => {
         break;
       }
       case "add": {
-        await add(inp);
+        await add(input);
         break;
       }
       case "cat": {
-        await cat(inp);
+        await cat(input);
         break;
       }
       case "rn": {
-        await rename(inp);
+        await rename(input);
         break;
       }
       case "cp": {
-        await copy(inp);
+        await copy(input);
         break;
       }
       case "mv": {
-        await move(inp);
+        await move(input);
         break;
       }
       case "rm": {
-        await remove(inp);
+        await remove(input);
         break;
       }
       case "hash": {
-        await hash(inp);
+        await hash(input);
         break;
       }
       case "compress": {
-        await compress(inp);
+        await compress(input);
         break;
       }
       case "decompress": {
-        await decompress(inp);
+        await decompress(input);
         break;
       }
 
       case "os": {
-        await systemOps(inp);
+        await systemOps(input);
         break;
       }
       default: {

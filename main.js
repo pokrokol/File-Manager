@@ -8,10 +8,10 @@ import { remove } from "./commands/fs/delete.js";
 import { up } from "./commands/nav/up.js";
 import { cd } from "./commands/nav/cd.js";
 import { ls } from "./commands/nav/ls.js";
-import { compress } from "./zip/compress.js";
+import { compress } from "./commands/zlib/compress.js";
 import { decompress } from "./zip/decompress.js";
 import { hash } from "./commands/hash/hash.js";
-
+import {os} from "./commands/os.js"
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -89,7 +89,9 @@ const fileManager = async () => {
         case "decompress":
           await decompress(args.join(" "));
           break;
-
+        case "os":
+          await os(args.join(" "));
+          break;
         default:
           console.error("Invalid command");
       }

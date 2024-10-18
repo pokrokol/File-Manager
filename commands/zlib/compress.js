@@ -3,7 +3,7 @@ import zlib from "zlib";
 import { resolveAbsolutePath } from "../helper/pathChecker";
 import path from "path";
 
-export const compressFile = async (input) => {
+export const compress = async (input) => {
   const [, filePathArg, newFilePathArg] = input.trim().split(" ");
   const sourceFilePath = resolveAbsolutePath(filePathArg);
   const destinationFilePath = path.join(

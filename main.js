@@ -5,6 +5,12 @@ import { rename } from "./commands/fs/rename.js";
 import { copy } from "./commands/fs/copy.js";
 import { move } from "./commands/fs/move.js";
 import { remove } from "./commands/fs/delete.js";
+import { up } from "./commands/nav/up.js";
+import { cd } from "./commands/nav/cd.js";
+import { ls } from "./commands/nav/ls.js";
+import { compress } from "./zip/compress.js";
+import { decompress } from "./zip/decompress.js";
+import { hash } from "./commands/hash/hash.js";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -76,7 +82,14 @@ const fileManager = async () => {
           await hash(args.join(" "));
           break;
 
-          
+        case "compress":
+          await compress(args.join(" "));
+          break;
+
+        case "decompress":
+          await decompress(args.join(" "));
+          break;
+
         default:
           console.error("Invalid command");
       }
@@ -88,7 +101,7 @@ const fileManager = async () => {
   });
 
   rl.on("SIGINT", () => {
-    console.log(`Thank you for using File Manager, ${username}!`);
+    console.log(`Thank you, Bye, ${username}!`);
     rl.close();
   });
 };

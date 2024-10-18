@@ -2,7 +2,7 @@ import crypto from "crypto";
 import fs from "fs";
 import path from "path";
 
-export const generateFileHash = async (input) => {
+export const hash = async (input) => {
   let filePath = input.trim().split("hash ")[1];
   if (!path.isAbsolute(filePath)) {
     filePath = path.join(process.cwd(), filePath);

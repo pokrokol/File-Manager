@@ -6,7 +6,6 @@ import { copy } from "./commands/fs/copy.js";
 import { move } from "./commands/fs/move.js";
 import { remove } from "./commands/fs/delete.js";
 
-
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
@@ -61,7 +60,23 @@ const fileManager = async () => {
           await remove(args.join(" "));
           break;
 
-      
+        case "up":
+          await up();
+          break;
+
+        case "cd":
+          await cd(args.join(" "));
+          break;
+
+        case "ls":
+          await ls();
+          break;
+
+        case "hash":
+          await hash(args.join(" "));
+          break;
+
+          
         default:
           console.error("Invalid command");
       }
